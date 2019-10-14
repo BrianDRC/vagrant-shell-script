@@ -40,10 +40,16 @@ then
     fi
 elif [[ $operation == "-h" ]] || [[ $operation == "--help" ]]
 then
-    echo -e "\n -h o --help Para ver comandos \n"
+    echo -e "\n Ayuda acerca del script, reportes o sugerencias https://github.com/BrianDRC/vagrant-shell-script \n
+    -h, --help              Ayuda sobre las opciones del script
+    up, start               Iniciar servidor, indicar nombre del que desea iniciar (-a o --all para iniciar todos)
+    kill, halt              Detener servidor, indicar nombre del que desea iniciar (-a o --all para detener todos)
+    ssh, connect            Establecer conexión por SSH al puerto indicado (ex. vgserver ssh 2222 -> Port)
+    
+    "
 elif [[ $operation == "-v" ]] || [[ $operation = "--version" ]]
 then
-    echo -e "\n Vagrant Control v0.7 \n"
+    echo -e "\n Vagrant Control v1.0 \n"
 else
-    echo -e "\n Opción In\n"
+    echo -e "\n -h o --help para ayuda sobre las opciones del script \n"
 fi
