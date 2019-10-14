@@ -11,6 +11,7 @@ then
     echo -e "\n Vagrant up \n"
     if [[ $server == "--all" ]] || [[ $server == "-a" ]]
     then
+        # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
         cd ~/VagrantInstances/Buster64/ ; vagrant up;
         cd ~/VagrantInstances/BusterFiles/ ; vagrant up;
     else
@@ -21,6 +22,7 @@ then
     echo -e "\n Vagrant halt \n"
     if [[ $server == "--all" ]] || [[ $server == "-a" ]]
     then
+        # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
         cd ~/VagrantInstances/Buster64/ ; vagrant halt;
         cd ~/VagrantInstances/BusterFiles/ ; vagrant halt;
     else
@@ -49,7 +51,7 @@ then
     "
 elif [[ $operation == "-v" ]] || [[ $operation = "--version" ]]
 then
-    echo -e "\n Vagrant Control v1.0 \n"
+    echo -e "\n Vagrant Control v1.3 \n"
 else
     echo -e "\n -h o --help para ayuda sobre las opciones del script \n"
 fi
