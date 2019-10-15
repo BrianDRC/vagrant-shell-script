@@ -24,9 +24,18 @@ then
     then
         # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
         cd ~/VagrantInstances/Buster64/ ; vagrant halt;
-        cd ~/VagrantInstances/BusterFiles/ ; vagrant halt;
     else
         cd ~/VagrantInstances/$server/ ; vagrant halt;
+    fi
+elif [[ $operation == "reload"  ]] || [[ $operation == "restart" ]]
+then
+    echo -e "\n Vagrant restart \n"
+    if [[ $server == "--all" ]] || [[ $server == "-a" ]]
+    then
+        # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
+        cd ~/VagrantInstances/Buster64/ ; vagrant halt; vagrant up;
+    else
+        cd ~/VagrantInstances/$server/ ; vagrant halt; vagrant up;
     fi
 elif [[ $operation == "ssh" ]] || [[ $operation == "connect" ]] 
 then
@@ -63,14 +72,16 @@ elif [[ $operation == "-h" ]] || [[ $operation == "--help" ]]
 then
     echo -e "\n Ayuda acerca del script, reportes o sugerencias https://github.com/BrianDRC/vagrant-shell-script \n
     -h, --help              Ayuda sobre las opciones del script
-    up, start               Iniciar servidor, indicar nombre del que desea iniciar (-a o --all para iniciar todos)
-    kill, halt              Detener servidor, indicar nombre del que desea iniciar (-a o --all para detener todos)
+    up, start               Iniciar instancia, indicar nombre del que desea iniciar (-a o --all para iniciar todos)
+    restart, reload         Reiniciar instancia, indicar nombre del que desea reiniciar (-a o --all para iniciar todos)
+    kill, halt              Detener instancia, indicar nombre del que desea detener (-a o --all para detener todos)
     ssh, connect            Establecer conexión por SSH al puerto indicado (ex. vgserver ssh 2222 -> Port)
     init, create            Crear una nueva instancia de Vagrant (vgserver create / init 'version' 'folderName')
+    -v, --version           File version
     "
 elif [[ $operation == "-v" ]] || [[ $operation = "--version" ]]
 then
-    echo -e "\n Vagrant Control v1.5 \n"
+    echo -e "\n Vagrant Control v2.0 \n"
 else
     echo -e "\n -h o --help para ayuda sobre las opciones del script \n"
 fi
