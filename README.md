@@ -33,8 +33,6 @@ Al finalizar debe ejecutar el siguiente comando para activar el alias en el ento
 * ## init / create
 Para crear una instancia existen 2 parámetros admitidos, 'init' y 'create', deberá indicar tanto la versión que desea inicializar como el nombre de la carpeta que contendrá el VagrantFile. Si desea un VagrantFile sin comentarios ni ayudas solo agregue '-m' a la versión.
 
-Ejemplos
-
 ```shell
     vgserver [create|init] 'debian/buster64' 'folderName'
 ```
@@ -46,8 +44,6 @@ o
 ```
 
 Si desea sobreescribir un VagrantFile existente en una carpeta deberá indicar la carpeta y la versión igualmente pero agregando '-f' a la versión
-
-Ejemplos
 
 ```shell
     vgserver [create|init] '-f debian/buster64' 'folderName'
