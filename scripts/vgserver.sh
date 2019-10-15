@@ -40,6 +40,25 @@ then
     else
         echo -e "\n Al intentar conectarse a una instancia Vagrant por SSH debe proveer el número de puerto, verifique la información digitada \n"
     fi
+elif [[ $operation == "init" ]] || [[ $operation == "create" ]] 
+then
+    version=${args[1]}
+    folder=${args[2]}
+    if [[ $version == "-h" ]] || [[ $version == "--help" ]]
+    then
+        echo -e " 
+    Create Examples \n
+    Create a base Vagrantfile                                               vgserver create / init 'debian/buster64' folderName
+    Create a minimal Vagrantfile (no comments or helpers)                   vgserver create / init '-m debian/buster64' folderName
+    Create a new Vagrantfile, overwriting the one at the current path       vgserver create / init '-f debian/buster64' folderName
+    "
+    else
+        echo -e "\n Creating Instance \n"
+        echo -e "\n Creando Máquina $version en /home/VagrantInstances/ \n"
+        mkdir ~/VagrantInstances/$folder
+        cd ~/VagrantInstances/$folder/; vagrant init $version ; vagrant up ;
+        echo -e "\n"
+    fi
 elif [[ $operation == "-h" ]] || [[ $operation == "--help" ]]
 then
     echo -e "\n Ayuda acerca del script, reportes o sugerencias https://github.com/BrianDRC/vagrant-shell-script \n
@@ -47,11 +66,11 @@ then
     up, start               Iniciar servidor, indicar nombre del que desea iniciar (-a o --all para iniciar todos)
     kill, halt              Detener servidor, indicar nombre del que desea iniciar (-a o --all para detener todos)
     ssh, connect            Establecer conexión por SSH al puerto indicado (ex. vgserver ssh 2222 -> Port)
-    
+    init, create            Crear una nueva instancia de Vagrant (vgserver create / init 'version' 'folderName')
     "
 elif [[ $operation == "-v" ]] || [[ $operation = "--version" ]]
 then
-    echo -e "\n Vagrant Control v1.3 \n"
+    echo -e "\n Vagrant Control v1.5 \n"
 else
     echo -e "\n -h o --help para ayuda sobre las opciones del script \n"
 fi

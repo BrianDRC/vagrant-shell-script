@@ -8,6 +8,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd ~/ ; 
 echo -e " Creando directorio en /home/ \n"
 mkdir scripts ;
+mkdir VagrantInstances ;
 echo -e " Copiando archivos a /home/scripts/ \n"
 cp $SCRIPTPATH/scripts/vgserver.sh ~/scripts/ ; 
 cd ~/scripts/ ; 
