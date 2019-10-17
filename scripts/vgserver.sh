@@ -54,7 +54,8 @@ elif [ $operation == "reload" ] || [ $operation == "restart" ]; then
 elif [ $operation == "ssh" ] || [ $operation == "connect" ]; then
     echo " SSH Connection "
     port=$2
-    if [ "$port" =~ ^[0-9]+$ ]; then
+    re='^[0-9]+$'
+    if [[ $port =~ $re ]]; then
         echo " Estableciendo conexión "
         ssh vagrant@localhost -p $port
         echo ""
