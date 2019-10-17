@@ -1,76 +1,87 @@
 #! /bin/bash
 
 # Control variables
-args=("$@")
-operation=${args[0]}
-server=${args[1]}
+operation=$1
+server=$2
 
 # Start
-if [[ $operation == "up" ]] || [[ $operation == "start" ]]
-then
-    echo -e "\n Vagrant up \n"
-    if [[ $server == "--all" ]] || [[ $server == "-a" ]]
-    then
+if [ $operation == "up" ] || [ $operation == "start" ]; then
+    echo " Vagrant up "
+    if [ $server == "--all" ] || [ $server == "-a" ]; then
         # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
-        cd ~/VagrantInstances/Buster64/ ; vagrant up;
-        cd ~/VagrantInstances/BusterFiles/ ; vagrant up;
+        cd ~/VagrantInstances/vpcli/
+        vagrant up
+        cd ~/VagrantInstances/vpcolas/
+        vagrant up
+        cd ~/VagrantInstances/vpweb/
+        vagrant up
     else
-        cd ~/VagrantInstances/$server/ ; vagrant up;
+        cd ~/VagrantInstances/$server/
+        vagrant up
     fi
-elif [[ $operation == "kill"  ]] || [[ $operation == "halt" ]]
-then
-    echo -e "\n Vagrant halt \n"
-    if [[ $server == "--all" ]] || [[ $server == "-a" ]]
-    then
+elif [ $operation == "kill" ] || [ $operation == "halt" ]; then
+    echo " Vagrant halt "
+    if [ $server == "--all" ] || [ $server == "-a" ]; then
         # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
-        cd ~/VagrantInstances/Buster64/ ; vagrant halt;
+        cd ~/VagrantInstances/vpweb/
+        vagrant halt
+        cd ~/VagrantInstances/vpcolas/
+        vagrant halt
+        cd ~/VagrantInstances/vpcli/
+        vagrant halt
     else
-        cd ~/VagrantInstances/$server/ ; vagrant halt;
+        cd ~/VagrantInstances/$server/
+        vagrant halt
     fi
-elif [[ $operation == "reload"  ]] || [[ $operation == "restart" ]]
-then
-    echo -e "\n Vagrant restart \n"
-    if [[ $server == "--all" ]] || [[ $server == "-a" ]]
-    then
+elif [ $operation == "reload" ] || [ $operation == "restart" ]; then
+    echo " Vagrant restart "
+    if [ $server == "--all" ] || [ $server == "-a" ]; then
         # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
-        cd ~/VagrantInstances/Buster64/ ; vagrant halt; vagrant up;
+        cd ~/VagrantInstances/vpcli/
+        vagrant halt
+        vagrant up
+        cd ~/VagrantInstances/vpcolas/
+        vagrant halt
+        vagrant up
+        cd ~/VagrantInstances/vpweb/
+        vagrant halt
+        vagrant up
     else
-        cd ~/VagrantInstances/$server/ ; vagrant halt; vagrant up;
+        cd ~/VagrantInstances/$server/
+        vagrant halt
+        vagrant up
     fi
-elif [[ $operation == "ssh" ]] || [[ $operation == "connect" ]] 
-then
-    echo -e "\n SSH Connection \n"
-    port=${args[1]}
-    if [[ "$port" =~ ^[0-9]+$ ]]
-    then
-        echo -e "\n Estableciendo conexión \n"
+elif [ $operation == "ssh" ] || [ $operation == "connect" ]; then
+    echo " SSH Connection "
+    port=$2
+    if [ "$port" =~ ^[0-9]+$ ]; then
+        echo " Estableciendo conexión "
         ssh vagrant@localhost -p $port
-        echo -e "\n"
+        echo ""
     else
-        echo -e "\n Al intentar conectarse a una instancia Vagrant por SSH debe proveer el número de puerto, verifique la información digitada \n"
+        echo " Al intentar conectarse a una instancia Vagrant por SSH debe proveer el número de puerto, verifique la información digitada "
     fi
-elif [[ $operation == "init" ]] || [[ $operation == "create" ]] 
-then
-    version=${args[1]}
-    folder=${args[2]}
-    if [[ $version == "-h" ]] || [[ $version == "--help" ]]
-    then
-        echo -e " 
-    Create Examples \n
+elif [ $operation == "init" ] || [ $operation == "create" ]; then
+    version=$2
+    folder=$3
+    if [ $version == "-h" ] || [ $version == "--help" ]; then
+        echo " 
+    Create Examples
     Create a base Vagrantfile                                               vgserver create / init 'debian/buster64' folderName
     Create a minimal Vagrantfile (no comments or helpers)                   vgserver create / init '-m debian/buster64' folderName
     Create a new Vagrantfile, overwriting the one at the current path       vgserver create / init '-f debian/buster64' folderName
     "
     else
-        echo -e "\n Creating Instance \n"
-        echo -e "\n Creando Máquina $version en /home/VagrantInstances/ \n"
+        echo " Creating Instance "
+        echo " Creando Máquina $version en /home/VagrantInstances/$folder"
         mkdir ~/VagrantInstances/$folder
-        cd ~/VagrantInstances/$folder/; vagrant init $version ; vagrant up ;
-        echo -e "\n"
+        cd ~/VagrantInstances/$folder/
+        vagrant init $version
+        vagrant up
+        echo ""
     fi
-elif [[ $operation == "-h" ]] || [[ $operation == "--help" ]]
-then
-    echo -e "\n Ayuda acerca del script, reportes o sugerencias https://github.com/BrianDRC/vagrant-shell-script \n
+elif [ $operation == "-h" ] || [ $operation == "--help" ]; then
+    echo " Ayuda acerca del script, reportes o sugerencias https://github.com/BrianDRC/vagrant-shell-script 
     -h, --help              Ayuda sobre las opciones del script
     up, start               Iniciar instancia, indicar nombre del que desea iniciar (-a o --all para iniciar todos)
     restart, reload         Reiniciar instancia, indicar nombre del que desea reiniciar (-a o --all para iniciar todos)
@@ -79,9 +90,8 @@ then
     init, create            Crear una nueva instancia de Vagrant (vgserver create / init 'version' 'folderName')
     -v, --version           File version
     "
-elif [[ $operation == "-v" ]] || [[ $operation = "--version" ]]
-then
-    echo -e "\n Vagrant Control v2.0 \n"
+elif [ $operation == "-v" ] || [ $operation == "--version" ]; then
+    echo " Vagrant Control v2.0 "
 else
-    echo -e "\n -h o --help para ayuda sobre las opciones del script \n"
+    echo " -h o --help para ayuda sobre las opciones del script "
 fi
