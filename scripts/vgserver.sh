@@ -11,7 +11,7 @@ if [ $operation == "up" ] || [ $operation == "start" ]; then
         # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
         cd ~/VagrantInstances/vpcli/
         vagrant up
-        cd ~/VagrantInstances/vpcolas/
+        cd ~/VagrantInstances/vpbroker/
         vagrant up
         cd ~/VagrantInstances/vpweb/
         vagrant up
@@ -25,7 +25,7 @@ elif [ $operation == "kill" ] || [ $operation == "halt" ]; then
         # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
         cd ~/VagrantInstances/vpweb/
         vagrant halt
-        cd ~/VagrantInstances/vpcolas/
+        cd ~/VagrantInstances/vpbroker/
         vagrant halt
         cd ~/VagrantInstances/vpcli/
         vagrant halt
@@ -39,12 +39,15 @@ elif [ $operation == "reload" ] || [ $operation == "restart" ]; then
         # Editar para agregar más máquinas según cuantas desee, copiar y pegar la linea siguiente cambiando el nombre de la carpeta, según las instancias dentro de su VagrantInstances
         cd ~/VagrantInstances/vpcli/
         vagrant halt
-        vagrant up
-        cd ~/VagrantInstances/vpcolas/
+        cd ~/VagrantInstances/vpbroker/
         vagrant halt
-        vagrant up
         cd ~/VagrantInstances/vpweb/
         vagrant halt
+        cd ~/VagrantInstances/vpcli/
+        vagrant up
+        cd ~/VagrantInstances/vpbroker/
+        vagrant up
+        cd ~/VagrantInstances/vpweb/
         vagrant up
     else
         cd ~/VagrantInstances/$server/
