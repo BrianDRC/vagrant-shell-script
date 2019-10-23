@@ -73,11 +73,11 @@ elif [ $operation == "scp" ] || [ $operation == "transfer" ]; then
         src=$3
         destino=$4
         echo " Estableciendo conexión "
-        scp -P $port -r $src root@127.0.0.1:/home/$destino/
+        scp -P $port -r $src root@127.0.0.1:/home/vagrant/$destino/
         echo ""
     else
         echo " Al intentar conectarse a una instancia Vagrant por SSH debe proveer el número de puerto, verifique la información digitada "
-    fi    
+    fi
 elif [ $operation == "init" ] || [ $operation == "create" ]; then
     version=$2
     folder=$3
