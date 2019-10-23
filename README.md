@@ -34,7 +34,6 @@ Si ya posee el script para realizar una actualización del mismo simplemente eje
     sh updater.sh
 ```
 
-
 ## Uso
 
 * ## init / create
@@ -121,6 +120,12 @@ Suponiendo que cuenta con una instancia dentro de ~/VagrantInstances/ llamada `B
 
 ```shell
     vgserver [ssh|connect] 2222
+```
+
+Pero también cuenta con la opción de ejecutar comandos en la consola de su máquina vagrant suponiendo que desea ejecutar un script en la ruta `~/scripts/` por medio de la siguiente sintaxis puede realizarlo.
+
+```shell
+    vgserver [ssh|connect] puerto "sh ~/scripts/script.sh"
 ```
 
 * ## scp / transfer
