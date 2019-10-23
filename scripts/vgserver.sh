@@ -73,7 +73,7 @@ elif [ $operation == "scp" ] || [ $operation == "transfer" ]; then
         src=$3
         destino=$4
         echo " Estableciendo conexión "
-        scp -P $port -r $src root@127.0.0.1:/$destino/
+        scp -P $port -r $src root@127.0.0.1:/home/$destino/
         echo ""
     else
         echo " Al intentar conectarse a una instancia Vagrant por SSH debe proveer el número de puerto, verifique la información digitada "
@@ -99,16 +99,17 @@ elif [ $operation == "init" ] || [ $operation == "create" ]; then
     fi
 elif [ $operation == "-h" ] || [ $operation == "--help" ]; then
     echo " Ayuda acerca del script, reportes o sugerencias https://github.com/BrianDRC/vagrant-shell-script 
-    -h, --help              Ayuda sobre las opciones del script
-    up, start               Iniciar instancia, indicar nombre del que desea iniciar (-a o --all para iniciar todos)
-    restart, reload         Reiniciar instancia, indicar nombre del que desea reiniciar (-a o --all para iniciar todos)
-    kill, halt              Detener instancia, indicar nombre del que desea detener (-a o --all para detener todos)
-    ssh, connect            Establecer conexión por SSH al puerto indicado (ex. vgserver ssh 2222 -> Port)
-    init, create            Crear una nueva instancia de Vagrant (vgserver create / init 'version' 'folderName')
-    -v, --version           File version
+    -h, --help          Ayuda sobre las opciones del script
+    up, start           Iniciar instancia, indicar nombre del que desea iniciar (-a o --all para iniciar todos)
+    restart, reload     Reiniciar instancia, indicar nombre del que desea reiniciar (-a o --all para iniciar todos)
+    kill, halt          Detener instancia, indicar nombre del que desea detener (-a o --all para detener todos)
+    ssh, connect        Establecer conexión por SSH al puerto indicado (ex. vgserver ssh 2222 -> Port)
+    scp, transfer       Transfiere información por scp al servidor que desee por su puerto ssh (ex. vgserver scp 2222 carpeta/ destino/)
+    init, create        Crear una nueva instancia de Vagrant (vgserver create / init 'version' 'folderName')
+    -v, --version       File version
     "
 elif [ $operation == "-v" ] || [ $operation == "--version" ]; then
-    echo " Vagrant Control v2.0 "
+    echo " Vagrant Control v2.2 "
 else
     echo " -h o --help para ayuda sobre las opciones del script "
 fi
