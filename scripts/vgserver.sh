@@ -111,7 +111,6 @@ elif [ $operation == "init" ] || [ $operation == "create" ]; then
         mkdir ~/VagrantInstances/$folder
         cd ~/VagrantInstances/$folder/
         vagrant init $version
-        vagrant up
         echo ""
     fi
 elif [ $operation == "-h" ] || [ $operation == "--help" ]; then
